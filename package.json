@@ -2,15 +2,16 @@
   "name": "svelte-app",
   "version": "1.0.0",
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "start": "sirv public",
+  "build": "rollup -c",
+  "dev": "HOST=0.0.0.0 rollup -c -w",
+  "start": "sirv public",
     "publish": "gulp publish",
     "fetch-doc": "node ./scripts/fetch-doc.js",
     "fallbacks": "node ./scripts/fallbacks.js",
     "rotate-aws-keys": "./scripts/rotate-aws-keys.sh"
   },
   "devDependencies": {
+    "@bulatdashiev/svelte-slider": "^1.0.3",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-html": "^0.2.3",
     "@rollup/plugin-json": "^4.1.0",

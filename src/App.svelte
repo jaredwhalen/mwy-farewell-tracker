@@ -2,65 +2,17 @@
   import Meta from "./Meta.svelte";
   import Header from "./components/Header.svelte"
   import Intro from "./components/Intro.svelte"
+  import Legend from "./components/Legend.svelte"
+  import Controls from "./components/Controls.svelte"
   import Viz from "./components/Viz.svelte"
 
-  import discography from "./data/discography.json"
-  import setlists from "./data/setlists.json"
 
+  import shows from "./data/shows.json"
 
-  discography.sort((a,b) => new Date(b.release_date) - new Date(a.release_date))
+  console.log(shows)
 
-  let normalize = str => str.toLowerCase().replace("two", "2").replace(/[^a-zA-Z ]/g, "")
-
-  let tour = []
-  setlists.map(d => {
-    let obj = {
-      date: d.$.eventDate,
-      venue: d.venue[0].$.name,
-      city: d.venue[0].city[0].$.name,
-      state: d.venue[0].city[0].$.stateCode,
-      setlist: []
-    }
-
-    d.sets[0].set.map(x => x.song.map(s => obj.setlist.push(normalize(s.$.name))))
-
-    tour.push(obj)
-  })
-
-  let shows = []
-  tour.forEach(s => {
-    let showObj = {
-      date: s.date,
-      venue: s.venue,
-      city: s.city,
-      state: s.state,
-      setlist: []
-    }
-    let setlist = s.setlist
-    // console.log(discography)
-    discography.map(album => {
-      let albumObj = {
-        name: album.name,
-        tracks: []
-      }
-      album.tracks.map(track => {
-        let trackObj = {
-          name: track.name,
-          preview_url: track.preview_url,
-          played: setlist.includes(normalize(track.name))
-        }
-
-        if (trackObj.played) {
-          trackObj.index = setlist.indexOf(normalize(track.name))
-        }
-
-        albumObj.tracks.push(trackObj)
-      })
-      showObj.setlist.push(albumObj)
-    })
-    shows.push(showObj)
-  })
-
+  // let colors = ["#edf8b1", "#2c7fb8"]
+  let colors = ["#0495E6", "#f94aad"]
 
 </script>
 
@@ -68,7 +20,12 @@
   <Header/>
   <Intro/>
 
-  <Viz {shows}/>
+  <div class="side-by-side">
+    <Controls {colors} />
+    <Legend {colors} />
+  </div>
+
+  <Viz {shows} {colors}/>
 
 </main>
 
@@ -84,15 +41,18 @@
 
 
 :global(:root) {
-  /* --light: #F9F6E9;
-  --dark: #ebe8db;
-  --primary: #15293e;
-  --accent: #c86dd0; */
-  --light: #4F4F4F;
+  // --light: #4F4F4F;
+  // --dark: #252525;
+  // --primary: #EFE6D3;
+  // --accent: #B7AEA1;
+  // --color-offwhite: #FCFCFD;
+
+  --light: #fee917;
   --dark: #252525;
-  --primary: #EFE6D3;
-  --accent: #B7AEA1;
-  --color-offwhite: #FCFCFD;
+  --primary: #00070A;
+  --accent: #0495E6;
+  --color-offwhite: #FC4CAF;
+
   --font-serif: 'PT Serif', serif;
   --font-sans: 'Raleway', sans-serif;
 }
@@ -108,6 +68,15 @@
 
 }
 
+.side-by-side {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 25px;
+  margin: 0 auto;
+  max-width: 600px;
+  position: relative;
+}
 
 footer {
   max-width: 800px;

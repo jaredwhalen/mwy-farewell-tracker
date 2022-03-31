@@ -1,12 +1,19 @@
 <header>
 
-<div class="h-stack">
+<!-- <div class="h-stack">
   <div>THE</div>
   <div>mewithoutYou</div>
   <div>“FAREWELL”</div>
   <div>TOUR <span>[visualized]</span></div>
-</div>
+</div> -->
 
+<div class="h-stack">
+  <div>THE</div>
+  <div>mewithoutYou</div>
+  <div>“BROTHER, SISTER”</div>
+  <div>15 & 16 YEAR ANNIVERSARY</div>
+  <div>TOUR <span>[visualized]</span></div>
+</div>
 
   <div class="g-share">
     <a target="_blank" href="https://twitter.com/jared_whalen">
@@ -22,7 +29,7 @@
       <svg id="github" data-name="github" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.58 31.77">
         <path
           d="M249.88,233.65a16.29,16.29,0,0,0-5.15,31.75c.81.15,1.11-.35,1.11-.78s0-1.41,0-2.77c-4.53,1-5.49-2.19-5.49-2.19a4.3,4.3,0,0,0-1.81-2.38c-1.48-1,.11-1,.11-1a3.41,3.41,0,0,1,2.5,1.68,3.46,3.46,0,0,0,4.74,1.35,3.54,3.54,0,0,1,1-2.18c-3.61-.41-7.42-1.8-7.42-8a6.3,6.3,0,0,1,1.68-4.37,5.82,5.82,0,0,1,.16-4.31s1.37-.44,4.48,1.67a15.41,15.41,0,0,1,8.16,0c3.11-2.11,4.47-1.67,4.47-1.67a5.82,5.82,0,0,1,.16,4.31,6.26,6.26,0,0,1,1.68,4.37c0,6.26-3.81,7.64-7.44,8a3.91,3.91,0,0,1,1.11,3c0,2.18,0,3.93,0,4.47s.29.94,1.12.78a16.3,16.3,0,0,0-5.16-31.75Z"
-          transform="translate(-233.59 -233.65)" style="fill:#dddddd;fill-rule:evenodd"></path>
+          transform="translate(-233.59 -233.65)" style="fill-rule:evenodd"></path>
       </svg>
     </a>
   </div>
@@ -34,6 +41,8 @@
   header {
     margin-top: 100px;
     text-align: center;
+    width: 100vw;
+    overflow: hidden;
   }
 
    header .g-share {
@@ -47,12 +56,12 @@
     width: 20px;
     margin: 0px 10px;
     opacity: 1;
-    fill: #dddddd;
+    fill: var(--color-offwhite);
   }
 
 
   .h-stack {
-    font-size: 14px;
+    font-size: 16px;
     font-family: 'Amiri', serif;
 
     div {
@@ -71,8 +80,9 @@
         font-size: 7em;
         font-weight: bold;
         line-height: 0.8;
+        color: var(--color-offwhite)
       }
-      &:nth-child(4) {
+      &:nth-child(4), &:nth-child(5) {
         font-size: 3em;
         line-height: 0.8;
       }
@@ -80,7 +90,8 @@
       span {
         font-family: 'Libre Baskerville', serif;
         font-style: italic;
-        color: var(--color-offwhite)
+        // color: var(--color-offwhite)
+        color: var(--accent)
       }
 
     }

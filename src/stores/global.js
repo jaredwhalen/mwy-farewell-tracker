@@ -10,3 +10,5 @@ export const isMobile = derived(windowWidth,
 export const isLarge = derived(windowWidth,
     $windowWidth => $windowWidth > 1200 ? true : false
 )
+
+export const volume = writable([0])

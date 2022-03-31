@@ -1,7 +1,8 @@
 <script>
   import {scaleSequential} from "d3-scale"
+  import {volume} from "../stores/global"
 
-  import Legend from "./Legend.svelte"
+
 
 
 
@@ -11,7 +12,7 @@
   let src;
 
   let maxNumberOfSongs = shows.map(d => d.setlist.map(a => a.tracks.filter(t => t.played).length).reduce((a, b) => a + b, 0)).sort((a, b) => b - a)[0]
-  let colors = ["#edf8b1", "#2c7fb8"];
+  export let colors;
   let colorScale = scaleSequential(colors).domain([1, maxNumberOfSongs])
 
   const onHover = (preview_url) => {
@@ -22,24 +23,26 @@
 
 
 
+
+
   $: src;
 </script>
 
 
   <audio
     bind:this={player}
+    bind:volume={$volume[0]}
 		{src}
     on:canplay={() => player.play()}
     >
   </audio>
-
-  <Legend {colors}/>
 
 <div id="viz">
 
   <div id="head">
   {#each shows as show}
     <div class="show">
+    <!-- <div class="label">{show.date}</div> -->
       <div class="label">{show.city}, {show.state}</div>
     </div>
   {/each}
@@ -86,12 +89,14 @@
 
   :global(:root) {
     --cellWidth: 25px;
-    --sidebarWidth: 300px;
+    --sidebarWidth: 400px;
   }
 
   #viz {
-    width: 100vw;
-    overflow-x: scroll;
+    // width: 100vw;
+    // overflow-x: scroll;
+    margin: 0 auto;
+    width: fit-content;
   }
 
   #head {
