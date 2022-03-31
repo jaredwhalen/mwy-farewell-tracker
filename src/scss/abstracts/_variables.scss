@@ -1,0 +1,29 @@
+@use "sass:map";
+@use "sass:list";
+
+
+/*=============================================
+=            Color Variables                  =
+=============================================*/
+
+/*=====  End of Color Variables  ======*/
+
+/*=============================================
+=            Structural                       =
+=============================================*/
+
+$breakpoints: (
+  // mobile-large, 329px
+  "small": 20.563em,
+  // tablet/newsletter, 599px
+  "medium": 37.438em,
+  // desktop, 785px
+  "large": 49.063em
+);
+
+// Used to calculate font size in font-clamp mixin.
+$breakpoints-min-width: 20.563rem;
+$breakpoints-max-width: 49.063rem;
+$breakpoints-width-diff: 28.5rem; // Difference in rems between small & large breakpoints
+
+/*=====  End of Structural  ======*/
