@@ -1,5 +1,4 @@
-import pkg from 'gh-pages';
-const {ghpages} = pkg;
+import {ghpages} from 'gh-pages'
 
 ghpages.publish(
     'public', // path to public directory

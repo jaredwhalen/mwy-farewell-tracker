@@ -15,4 +15,4 @@ git commit -m "gh-pages commit"
 git push origin gh-pages
 
 # Deploy the code with the gh-pages module
-node ./scripts/gh-pages.js
+node ./gh-pages.js
