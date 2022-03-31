@@ -12,6 +12,7 @@
   "dependencies": {
     "dotenv": "^16.0.0",
     "fetch-paginate": "^6.1.0",
+    "gh-pages": "^3.2.3",
     "jsdom": "^19.0.0",
     "node-fetch": "^3.2.3",
     "xml2js": "^0.4.23"
