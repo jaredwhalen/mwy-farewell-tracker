@@ -9,10 +9,7 @@
 
   import shows from "./data/shows.json"
 
-  console.log(shows)
-
-  // let colors = ["#edf8b1", "#2c7fb8"]
-  let colors = ["#0495E6", "#f94aad"]
+  let colors = ["#edf8b1", "#4d98cc"]
 
 </script>
 
@@ -41,27 +38,27 @@
 
 
 :global(:root) {
-  // --light: #4F4F4F;
-  // --dark: #252525;
-  // --primary: #EFE6D3;
-  // --accent: #B7AEA1;
-  // --color-offwhite: #FCFCFD;
-
-  --light: #fee917;
+  --light: #4F4F4F;
   --dark: #252525;
-  --primary: #00070A;
-  --accent: #0495E6;
-  --color-offwhite: #FC4CAF;
+  --primary: #EFE6D3;
+  --accent: #4d98cc;
+  --color-offwhite: #FCFCFD;
 
   --font-serif: 'PT Serif', serif;
   --font-sans: 'Raleway', sans-serif;
+  --font-mwy: 'Libre Baskerville', serif;
 }
 
 :global(body) {
   background: var(--light);
   color: var(--primary);
-  width: 100vw;
+  width: 100%;
   overflow-x: hidden;
+}
+
+:global(a) {
+  color: var(--accent);
+  text-decoration: none;
 }
 
 #App {
@@ -76,6 +73,7 @@
   margin: 0 auto;
   max-width: 600px;
   position: relative;
+  padding: 0 15px
 }
 
 footer {
@@ -89,5 +87,7 @@ footer {
     font-weight: 400;
   }
 }
+
+
 
 </style>

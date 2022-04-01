@@ -26,9 +26,10 @@
 
   #Legend {
     padding: 25px;
-
-
     font-family: var(--font-sans);
+    @include mobile {
+      margin: 0 auto;
+    }
 
     h4 {
       color: var(--color-offwhite);

@@ -1,19 +1,13 @@
 <header>
 
-<!-- <div class="h-stack">
+<div class="h-stack">
   <div>THE</div>
   <div>mewithoutYou</div>
   <div>“FAREWELL”</div>
   <div>TOUR <span>[visualized]</span></div>
-</div> -->
-
-<div class="h-stack">
-  <div>THE</div>
-  <div>mewithoutYou</div>
-  <div>“BROTHER, SISTER”</div>
-  <div>15 & 16 YEAR ANNIVERSARY</div>
-  <div>TOUR <span>[visualized]</span></div>
 </div>
+
+<div class="byline">A data visualization by <a href="https://jaredwhalen.com/" target="_blank">Jared Whalen</a></div>
 
   <div class="g-share">
     <a target="_blank" href="https://twitter.com/jared_whalen">
@@ -61,39 +55,50 @@
 
 
   .h-stack {
-    font-size: 16px;
+    // font-size: 16px;
+    font-size: 2vw;
     font-family: 'Amiri', serif;
 
     div {
       padding-bottom: 15px;
       &:nth-child(1) {
-        font-size: 2em;
+        @include font-clamp(12px, 18px);
         line-height: 1;
       }
       &:nth-child(2) {
-        font-size: 3em;
+        @include font-clamp(20px, 30px);
         font-style: italic;
-        font-family: 'Libre Baskerville', serif;
+        font-family: var(--font-mwy);
         line-height: 1;
       }
       &:nth-child(3) {
-        font-size: 7em;
+        @include font-clamp(20px, 80px);
         font-weight: bold;
         line-height: 0.8;
-        color: var(--color-offwhite)
+        color: var(--color-offwhite);
       }
       &:nth-child(4), &:nth-child(5) {
-        font-size: 3em;
+        @include font-clamp(12px, 18px);
         line-height: 0.8;
       }
 
       span {
-        font-family: 'Libre Baskerville', serif;
+        font-family: var(--font-mwy);
         font-style: italic;
-        // color: var(--color-offwhite)
-        color: var(--accent)
+        color: var(--color-offwhite)
       }
 
+    }
+  }
+
+  .byline {
+    font-family: var(--font-sans);
+    color: var(--color-offwhite);
+    font-size: 18px;
+    padding: 15px 0px 0px;
+    a {
+      color: var(--accent);
+      text-decoration: none;
     }
   }
 

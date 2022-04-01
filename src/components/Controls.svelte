@@ -5,13 +5,16 @@
   export let colors;
 </script>
 
-<div id="Controls">
+<div id="Controls" >
   Turn up the volume to play songs on hover
   <Slider bind:value={$volume} min=0 max=1 step=0.1><span  style="font-size: 20px;">🔊</span></Slider>
 </div>
 
 
-<style>
+<style lang="scss">
+
+
+
 
   div {
     min-width: 30%;
@@ -19,6 +22,12 @@
     font-family: var(--font-sans);
     color: var(--color-offwhite);
   }
+
+  @include mobile {
+      #Controls {
+        display: none;
+      }
+    }
 
   :root {
     --track-bg: #ebebeb;

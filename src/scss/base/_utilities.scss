@@ -1,2 +1,10 @@
-@use "../abstracts" as *;
-@use "sass:map";
+@use "base/base";
+@use "base/typography";
+@use "base/utilities";
+
+/* Mobile Specific Styles */
+@include mq("medium") {
+  .is-mobile {
+    display: none;
+  }
+}

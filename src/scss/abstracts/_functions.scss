@@ -4,3 +4,53 @@
 /*=================================
 =            Functions            =
 =================================*/
+
+/* Set this to 8px and set the body { font-size: 8px} in base/_base.scss to work on Axios.com */
+$browser-context: 8px;
+
+@function rem($size) {
+  @if is-px($size) == false {
+    $size: $size * 1px;
+  }
+
+  $rem-size: math.div($size, $browser-context);
+  @return $rem-size * 1rem;
+}
+
+@function em($pixels, $context: $browser-context) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+
+  @return math.div($pixels, $context) * 1em;
+}
+
+@function is-number($value) {
+  @return type-of($value) == "number";
+}
+
+@function is-px($value) {
+  @return is-number($value) and index("px", unit($value)) != null;
+}
+
+// Calculates the slope based off the min/max font size and min/max widths.
+@function calc-slope($min-font-size, $max-font-size) {
+  $font-size-diff: $max-font-size - $min-font-size;
+
+  $result: math.div($font-size-diff, $breakpoints-width-diff);
+
+  @return $result;
+}
+
+// Returns the preferred value for the font-clamp mixin based on the min/max font sizes.
+@function calc-preferred-font-value($min-font-size, $max-font-size) {
+  $slope: calc-slope($min-font-size, $max-font-size);
+
+  $intersection: -($breakpoints-min-width) * $slope + $min-font-size;
+
+  @return ($intersection, ($slope * 100vw));
+}

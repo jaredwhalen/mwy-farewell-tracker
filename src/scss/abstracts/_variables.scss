@@ -1,5 +1,6 @@
 @use "sass:map";
 @use "sass:list";
+@use "sass:color";
 
 
 /*=============================================
@@ -27,3 +28,13 @@ $breakpoints-max-width: 49.063rem;
 $breakpoints-width-diff: 28.5rem; // Difference in rems between small & large breakpoints
 
 /*=====  End of Structural  ======*/
+
+/*=============================================
+=            Custom            =
+=============================================*/
+
+$size-container-max-width: 1400px;
+$size-content-max-width: 800px;
+$size-text-content-max-width: 600px;
+
+/*=====  End of Custom  ======*/

@@ -73,6 +73,7 @@
                       class="track {track.played ? 'played' : 'hidden'}"
                       style="background: {track.played ? colorScale(track.index) : ''}"
                       data-index={track.index}
+                      on:click={() => onHover(track.preview_url)}
                       on:mouseenter={() => onHover(track.preview_url)}
                       on:mouseleave={() => player.pause()}></div>
                   </div>
@@ -93,10 +94,10 @@
   }
 
   #viz {
-    // width: 100vw;
-    // overflow-x: scroll;
-    margin: 0 auto;
-    width: fit-content;
+    width: 100vw;
+    overflow-x: scroll;
+    // margin: 0 auto;
+    // width: fit-content;
   }
 
   #head {
@@ -169,8 +170,8 @@
   #discography {
     min-width: var(--sidebarWidth);
     max-width: var(--sidebarWidth);
-    position: sticky;
-    left: 0px;
+    // position: sticky;
+    // left: 0px;
     background: var(--light);
     z-index: 1000;
     padding-left: 10px;

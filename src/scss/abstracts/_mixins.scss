@@ -7,6 +7,37 @@
 =            Mixins            =
 =================================*/
 
+@mixin desktop {
+  @media only screen and (max-width: 1000px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media only screen and (max-width: 720px) {
+    @content;
+  }
+}
+@mixin mobile {
+  @media only screen and (max-width: 480px) {
+    @content;
+  }
+}
+@mixin BS-large {
+  @media only screen and (min-width: 1200px) {
+    @content;
+  }
+}
+@mixin BS-medium {
+  @media only screen and (min-width: 992px) {
+    @content;
+  }
+}
+@mixin BS-small {
+  @media only screen and (min-width: 768px) {
+    @content;
+  }
+}
+
 // Breakpoints
 // $break: Breakpoint to use
 // $dir: 'min-width' or 'max-width'

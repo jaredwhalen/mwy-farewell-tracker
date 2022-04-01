@@ -1,11 +1,17 @@
 <div class="intro">
-<span class="firstcharacter">L</span>orem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in lobortis diam. Cras egestas mollis lorem, sit amet porttitor nibh vehicula eget. Ut a luctus libero. Duis commodo id ligula vel lacinia. In fringilla urna velit, a fermentum enim rutrum at. Nullam posuere in enim eu congue. Pellentesque sit amet elit id justo dignissim condimentum. Sed vestibulum, tellus et fermentum elementum, est nisl consectetur neque, non hendrerit lacus lectus sit amet elit. Morbi sit amet nibh et lorem venenatis porta vel vel tellus. Mauris quis magna malesuada elit sagittis consectetur sit amet ut turpis.
+
+  <p><span class="firstcharacter">H</span>aving released seven studio albums and five EPs over two decades, mewithoutYou has a thick catalogue to choose from when planning setlists on their farewell tour beginning in May 2022. Fans of the band know
+    that historically the setlist can vary greatly from night to night. Even on their most recent tour celebrating the 15 and 16 year anniversaries of “Brother, Sister” where the band played the album from from to back, they managed to not repeat the
+    same setlist once through encore sets spanning every record.</p>
+
+  <p>To demonstrate the uniqueness of every mewithoutYou show (and just as an opportunity to geek out about an amazing band), I am using <a href="https://www.setlist.fm/">setlist.fm</a> data to visualize what songs the band plays on each night of their farewell tour, as well as what
+    order in the set it is played. This app will update daily as new setlist data is made available.</p>
+
 
 
 </div>
 
 <style lang="scss">
-
   .intro {
     text-align: left;
     font-family: var(--font-sans);
@@ -13,6 +19,7 @@
     max-width: 600px;
     margin: 25px auto;
     padding: 0 15px;
+
     .firstcharacter {
       float: left;
       font-style: italic;
@@ -23,9 +30,14 @@
       padding-right: 8px;
       padding-left: 3px;
     }
+
+    p {
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+    }
+
+    a {
+
+    }
   }
-
-
-
-
 </style>
