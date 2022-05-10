@@ -1,2 +1,1 @@
-#mwy-farewell-tracker
- 
+# mwy-farewell-tracker
