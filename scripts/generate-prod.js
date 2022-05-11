@@ -19,21 +19,34 @@ setlists.forEach(d => d.$.eventDate = new Date(d.$.eventDate.split("-").reverse(
 
 setlists.sort((a,b) => new Date(a.$.eventDate) - new Date(b.$.eventDate))
 
-let normalize = str => str.toLowerCase().replace("two", "2").replace(/[^a-zA-Z ]/g, "")
+let normalize = str => str
+// specific songs
+.replace("Paper-Hanger", "Paper Hanger")
+.replace("Gentleman", "Gentlemen")
+// end
+.toLowerCase()
+.replace("two", "2")
+.replace(/[^a-zA-Z ]/g, "")
 
 let tour = []
-setlists.map(d => {
+setlists.forEach(d => {
   let obj = {
     date: d.$.eventDate,
     venue: d.venue[0].$.name,
     city: d.venue[0].city[0].$.name,
     state: d.venue[0].city[0].$.stateCode,
-    setlist: []
+    url: d.url,
+    setlistFlat: [],
+    setlist: [],
   }
 
-  d.sets[0].set.map(x => x.song.map(s => obj.setlist.push(normalize(s.$.name))))
-
-  tour.push(obj)
+  if (!!d.sets[0].set) {
+    d.sets[0].set.map(x => x.song.map(s => {
+      obj.setlist.push(normalize(s.$.name))
+      obj.setlistFlat.push(s.$.name)
+    }))
+    tour.push(obj)
+  }
 })
 
 let shows = []
@@ -44,8 +57,11 @@ tour.forEach(s => {
     venue: s.venue,
     city: s.city,
     state: s.state,
-    setlist: []
+    url: s.url,
+    setlist: [],
+    setlistFlat: s.setlistFlat
   }
+
   let setlist = s.setlist
 
   discography.map(album => {
@@ -73,11 +89,17 @@ tour.forEach(s => {
 })
 
 
-let sd = new Date("2021-08-15T00:00:00.000Z").getTime()
-let ed = new Date("2022-03-24T00:00:00.000Z").getTime()
 
-let filtered = shows.filter(d => {var time = new Date(d.date).getTime();
-                             return (sd <= time && time <= ed);
-                            });
+let sd = new Date("2022-05-09T00:00:00.000Z").getTime()
+let ed = new Date().getTime()
+
+let filtered = shows
+.filter(d => {
+  var time = new Date(d.date).getTime();
+  return (sd <= time && time <= ed);
+});
+
+
+console.log(filtered)
 
 fs.writeFileSync('../src/data/shows.json', JSON.stringify(filtered))

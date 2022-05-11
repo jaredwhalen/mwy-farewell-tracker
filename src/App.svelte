@@ -22,7 +22,8 @@
     <Legend {colors} />
   </div>
 
-  <Viz {shows} {colors}/>
+  <Viz shows={shows} {colors}/>
+
 
 </main>
 
@@ -52,8 +53,9 @@
 :global(body) {
   background: var(--light);
   color: var(--primary);
-  width: 100%;
-  overflow-x: hidden;
+  margin: 0px;
+  // width: 100%;
+  // overflow-x: hidden;
 }
 
 :global(a) {
@@ -62,7 +64,6 @@
 }
 
 #App {
-
 }
 
 .side-by-side {
@@ -73,7 +74,6 @@
   margin: 0 auto;
   max-width: 600px;
   position: relative;
-  padding: 0 15px
 }
 
 footer {

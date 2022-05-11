@@ -16,7 +16,16 @@ fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/albums?market=US&
   .then(albums => {
 
 
-    let removeList = ["0rNQkfrozT5NAIGMQCmZrY", "39P5R1B5XF1dGhpojrukVA", "0kehR2IIZopnzrQmX7vSdn", "5MvGNrIZQfOBuvyXkqXZm3", "5mjQR6Caqn6nC2Wax3n8nf", "2X3mjnQ9n6pzNgLMUGZ8Ex", "2X3mjnQ9n6pzNgLMUGZ8Ex"]
+    let removeList = [
+      "0rNQkfrozT5NAIGMQCmZrY",
+      "39P5R1B5XF1dGhpojrukVA",
+      "0kehR2IIZopnzrQmX7vSdn", // Cleo's Ferry Cemetery
+      "5MvGNrIZQfOBuvyXkqXZm3", //Audio Tree live
+      "5mjQR6Caqn6nC2Wax3n8nf", //Audio Tree live
+      "2X3mjnQ9n6pzNgLMUGZ8Ex",
+      "2X3mjnQ9n6pzNgLMUGZ8Ex" //East Enders Wives - Maxi Single
+    ]
+
     let filtered = JSON.parse(albums).items.filter(d => !removeList.includes(d.id))
 
     let arr = filtered.map(d => {

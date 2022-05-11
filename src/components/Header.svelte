@@ -19,7 +19,7 @@
         </g>
       </svg>
     </a>
-    <a target="_blank" href="https://github.com/jaredwhalen/concert-log">
+    <a target="_blank" href="https://github.com/jaredwhalen/mwy-farewell-tracker">
       <svg id="github" data-name="github" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.58 31.77">
         <path
           d="M249.88,233.65a16.29,16.29,0,0,0-5.15,31.75c.81.15,1.11-.35,1.11-.78s0-1.41,0-2.77c-4.53,1-5.49-2.19-5.49-2.19a4.3,4.3,0,0,0-1.81-2.38c-1.48-1,.11-1,.11-1a3.41,3.41,0,0,1,2.5,1.68,3.46,3.46,0,0,0,4.74,1.35,3.54,3.54,0,0,1,1-2.18c-3.61-.41-7.42-1.8-7.42-8a6.3,6.3,0,0,1,1.68-4.37,5.82,5.82,0,0,1,.16-4.31s1.37-.44,4.48,1.67a15.41,15.41,0,0,1,8.16,0c3.11-2.11,4.47-1.67,4.47-1.67a5.82,5.82,0,0,1,.16,4.31,6.26,6.26,0,0,1,1.68,4.37c0,6.26-3.81,7.64-7.44,8a3.91,3.91,0,0,1,1.11,3c0,2.18,0,3.93,0,4.47s.29.94,1.12.78a16.3,16.3,0,0,0-5.16-31.75Z"
@@ -72,7 +72,7 @@
         line-height: 1;
       }
       &:nth-child(3) {
-        @include font-clamp(20px, 80px);
+        @include font-clamp(20px, 70px);
         font-weight: bold;
         line-height: 0.8;
         color: var(--color-offwhite);

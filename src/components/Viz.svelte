@@ -1,29 +1,57 @@
 <script>
+  import tippy from "sveltejs-tippy";
   import {scaleSequential} from "d3-scale"
   import {volume} from "../stores/global"
-
-
-
+  import getFormattedDate from "../js/getFormattedDate"
 
 
   export let shows
+  console.log(shows)
+
+  // shows.forEach(show => show.setlistFlat = show.setlist.map(album => album.tracks.filter(track => track.played)).flat().sort((a,b) => a.index - b.index))
+
   let discography = shows[0].setlist
   let player
   let src;
 
-  let maxNumberOfSongs = shows.map(d => d.setlist.map(a => a.tracks.filter(t => t.played).length).reduce((a, b) => a + b, 0)).sort((a, b) => b - a)[0]
   export let colors;
-  let colorScale = scaleSequential(colors).domain([1, maxNumberOfSongs])
 
-  const onHover = (preview_url) => {
+  let normalize = str => str.toLowerCase().replace("two", "2").replace(/[^a-zA-Z ]/g, "")
+
+
+  // const getColor =  => {
+  //   let colorScale = scaleSequential(colors).domain([1, show.setlist.map(album => album.tracks.filter(track => track.played)).flat().length()])
+  // }
+
+  const onHover = (preview_url, show) => {
     player.pause()
     src = preview_url
     player.play()
   }
 
 
+  const generateProps = (show, song) => {
 
+    let setlistHTML = show.setlistFlat.map((track, i) => {
+      if (normalize(track) == normalize(song)) {
+        return `<li class="active">${i + 1}. ${track} <img src="./assets/equalizer-animation.gif"/></li>`
+      } else {
+        return `<li>${i + 1}. ${track}</li>`
+      }
+    }).join('')
 
+    let props = {
+      allowHTML: true,
+      // interactive: true,
+      content: `
+        <h4>${show.venue}, ${show.city}, ${show.state} on ${getFormattedDate(show.date)}</h4>
+        <ul>
+          ${setlistHTML}
+        </ul>
+      `,
+    }
+    return props
+  }
 
   $: src;
 </script>
@@ -42,8 +70,8 @@
   <div id="head">
   {#each shows as show}
     <div class="show">
-    <!-- <div class="label">{show.date}</div> -->
-      <div class="label">{show.city}, {show.state}</div>
+    <div class="label"><a href={show.url} target="_blank">{show.city}, {show.state} – {getFormattedDate(show.date)}</a></div>
+      <!-- <div class="label">{show.city}, {show.state}</div> -->
     </div>
   {/each}
   </div>
@@ -63,6 +91,7 @@
     </div>
     <div id="concerts">
       {#each shows as show}
+        {@const colorScale = scaleSequential(colors).domain([1, show.setlistFlat.length]) }
         <div class="setlist">
           {#each show.setlist as album}
             <div class="album">
@@ -72,9 +101,10 @@
                     <div
                       class="track {track.played ? 'played' : 'hidden'}"
                       style="background: {track.played ? colorScale(track.index) : ''}"
+                      use:tippy={generateProps(show, track.name)}
                       data-index={track.index}
                       on:click={() => onHover(track.preview_url)}
-                      on:mouseenter={() => onHover(track.preview_url)}
+                      on:mouseenter={() => onHover(track.preview_url, show)}
                       on:mouseleave={() => player.pause()}></div>
                   </div>
                 {/each}
@@ -91,10 +121,41 @@
   :global(:root) {
     --cellWidth: 25px;
     --sidebarWidth: 400px;
+    @include mobile {
+      --sidebarWidth: 250px;
+    }
+  }
+
+  :global(.tippy-content) {
+    color: var(--primary);
+    font-family: var(--font-sans);
+    font-size: 12px;
+  }
+
+  :global(.tippy-content h4) {
+    border-bottom: 1px solid;
+    font-weight: bold;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+
+  :global(.tippy-content ul) {
+    list-style-type: none;
+  }
+
+  :global(.tippy-content ul li.active) {
+    color: var(--color-offwhite);
+    font-weight: bold;
+  }
+
+  :global(.tippy-content ul li.active img) {
+    width: 15px;
+    opacity: 0.75;
   }
 
   #viz {
-    width: 100vw;
+    // width: 100vw;
     overflow-x: scroll;
     // margin: 0 auto;
     // width: fit-content;
@@ -102,13 +163,13 @@
 
   #head {
     padding-left: var(--sidebarWidth);
-    height: 120px;
+    height: 130px;
     display: flex;
     font-family: var(--font-sans);
     position: sticky;
     top: 0;
     background: var(--light);
-    z-index: 1000;
+    z-index: 20;
     padding-bottom: 20px;
     width: fit-content;
     padding-right: 10px;
@@ -123,9 +184,9 @@
         bottom: 0px;
         left: calc(var(--cellWidth)/1.5);
         transform: rotate(-45deg);
-        z-index: 1000;
+        z-index: 20;
         transform-origin: left;
-        font-size: 14px;
+        font-size: 12px;
         &::before {
           content: "";
           display: inline-block;
@@ -133,6 +194,10 @@
           border-left: 1px solid var(--color-offwhite);
           height: calc(var(--cellWidth)/2);
           position: absolute;
+        }
+
+        a {
+          color: var(--primary);
         }
       }
     }
@@ -173,7 +238,7 @@
     // position: sticky;
     // left: 0px;
     background: var(--light);
-    z-index: 1000;
+    z-index: 20;
     padding-left: 10px;
 
     .album {
@@ -194,7 +259,7 @@
 
   #concerts {
     display: flex;
-    z-index: 100;
+    z-index: 10;
 
     .cell {
       width: var(--cellWidth);
