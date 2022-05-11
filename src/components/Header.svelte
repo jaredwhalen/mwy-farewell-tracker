@@ -7,7 +7,7 @@
   <div>TOUR <span>[visualized]</span></div>
 </div>
 
-<div class="byline">A data visualization by <a href="https://jaredwhalen.com/" target="_blank">Jared Whalen</a></div>
+<div class="byline">A data visualization by <a href="https://www.jaredwhalen.com/" target="_blank">Jared Whalen</a></div>
 
   <div class="g-share">
     <a target="_blank" href="https://twitter.com/jared_whalen">
