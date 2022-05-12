@@ -84,6 +84,7 @@ tour.forEach(s => {
     })
     showObj.setlist.push(albumObj)
   })
+
   shows.push(showObj)
 
 })
@@ -99,7 +100,21 @@ let filtered = shows
   return (sd <= time && time <= ed);
 });
 
+filtered.forEach(show => {
+  if (show.setlist.map(album => album.tracks.filter(track => track.played)).flat().length != show.setlistFlat.length) {
+    console.log("Uneven setlist match.")
+  }
+})
 
-console.log(filtered)
+const currentData = JSON.parse(
+  await readFile(
+    new URL('../src/data/shows.json', import.meta.url)
+  )
+);
+
+
+if (currentData.length < filtered.length) {
+  console.log("new shows added")
+}
 
 fs.writeFileSync('../src/data/shows.json', JSON.stringify(filtered))

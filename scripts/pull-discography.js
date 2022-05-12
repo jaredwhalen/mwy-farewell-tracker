@@ -39,6 +39,7 @@ fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/albums?market=US&
     let discography = []
 
     arr.forEach((d, i) => {
+      console.log(d)
       fetch(`https://api.spotify.com/v1/albums/${d.id}/tracks`, options)
         .then(response => response.text())
         .then(tracks => {
