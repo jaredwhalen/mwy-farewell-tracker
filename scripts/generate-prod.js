@@ -30,7 +30,9 @@ let normalize = str => str
 
 let tour = []
 setlists.forEach(d => {
+  
   let obj = {
+    id: d.$.id,
     date: d.$.eventDate,
     venue: d.venue[0].$.name,
     city: d.venue[0].city[0].$.name,
@@ -53,6 +55,7 @@ let shows = []
 
 tour.forEach(s => {
   let showObj = {
+    id: s.id,
     date: s.date,
     venue: s.venue,
     city: s.city,
@@ -106,15 +109,22 @@ filtered.forEach(show => {
   }
 })
 
-const currentData = JSON.parse(
+const currentFiles = JSON.parse(
   await readFile(
-    new URL('../src/data/shows.json', import.meta.url)
+    new URL('../public/assets/shows.json', import.meta.url)
   )
 );
 
+const fileList = [...currentFiles];
 
-if (currentData.length < filtered.length) {
+if (currentFiles.length < filtered.length) {
+  for (let show of filtered) {
+    if (!currentFiles.includes(show.id)) {
+      fs.writeFileSync(`../public/assets/${show.id}.json`, JSON.stringify(show))
+      fileList.push(`${show.id}.json`)
+    }
+  }
   console.log("new shows added")
 }
 
-fs.writeFileSync('../src/data/shows.json', JSON.stringify(filtered))
+fs.writeFileSync('../public/assets/shows.json', JSON.stringify(fileList))

@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from "svelte"
   import Meta from "./Meta.svelte";
   import Header from "./components/Header.svelte"
   import Intro from "./components/Intro.svelte"
@@ -6,8 +7,13 @@
   import Controls from "./components/Controls.svelte"
   import Viz from "./components/Viz.svelte"
 
+  import { loadShows } from "./data/shows"
 
-  import shows from "./data/shows.json"
+  let shows
+
+  onMount(async () => {
+    shows = await loadShows();
+  })
 
   let colors = ["#edf8b1", "#4d98cc"]
 
@@ -22,9 +28,11 @@
     <Legend {colors} />
   </div>
 
-  <Viz shows={shows} {colors}/>
-
-
+  {#if shows !== undefined}
+    <Viz {shows} {colors}/>
+  {:else}
+    <div class="loading"/>
+  {/if}
 </main>
 
 <footer>
@@ -74,6 +82,22 @@
   margin: 0 auto;
   max-width: 600px;
   position: relative;
+}
+
+.loading {
+  margin: 0 auto;
+  height: 100px;
+  width: 100px;
+  border: 15px solid var(--dark);
+  border-top: 15px solid var(--primary);
+  border-radius: 50%;
+  opacity: 0.2;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 footer {
