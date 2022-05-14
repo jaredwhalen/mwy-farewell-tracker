@@ -1,0 +1,19 @@
+name: Update
+
+on:
+  workflow_dispatch: {} 
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: '11.x'
+      - name: Get latest setlist
+        run: node scripts/pull-setlists.js
+      - name: Generate production
+        run: node scripts/generate-prod.js
