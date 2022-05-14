@@ -5,6 +5,9 @@ on:
       
 jobs:
   build:
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      SETLISTFM_TOKEN: ${{ secrets.SETLISTFM_TOKEN }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
