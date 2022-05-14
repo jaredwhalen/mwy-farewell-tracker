@@ -1,5 +1,5 @@
-const ghpages = require('gh-pages')
-
+// const ghpages = require('gh-pages')
+import ghpages from 'ghpages'
 ghpages.publish(
     'public', // path to public directory
     {
