@@ -1,5 +1,6 @@
 import fs from 'fs'
 import { readFile } from 'fs/promises';
+import {spawn} from 'child_process'
 
 const discography = JSON.parse(
   await readFile(
@@ -115,6 +116,9 @@ const currentData = JSON.parse(
 
 if (currentData.length < filtered.length) {
   console.log("new shows added")
+  const ls = spawn("./update.sh");
 }
+
+const ls = spawn("./update.sh");
 
 fs.writeFileSync('../src/data/shows.json', JSON.stringify(filtered))
