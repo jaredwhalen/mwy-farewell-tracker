@@ -43,7 +43,7 @@ urls.forEach(async(url) => {
   await der(url)
   // console.log(res.setlists)
   console.log(arr)
-  fs.writeFileSync('../src/data/setlists.json', JSON.stringify(arr.flat()))
+  fs.writeFileSync('./src/data/setlists.json', JSON.stringify(arr.flat()))
 });
 
 

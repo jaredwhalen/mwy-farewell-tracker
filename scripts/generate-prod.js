@@ -2,6 +2,10 @@ import fs from 'fs'
 import { readFile } from 'fs/promises';
 import {spawn} from 'child_process'
 
+
+
+
+
 const discography = JSON.parse(
   await readFile(
     new URL('../src/data/discography.json', import.meta.url)
@@ -107,35 +111,30 @@ filtered.forEach(show => {
   }
 })
 
-const currentData = JSON.parse(
-  await readFile(
-    new URL('../src/data/shows.json', import.meta.url)
-  )
-);
 
+
+let currentData = JSON.parse(fs.readFileSync('./src/data/shows.json'));
 
 if (currentData.length < filtered.length) {
   console.log("new shows added")
-  const ls = spawn("./update.sh");
+  const ls = spawn("./scripts/update.sh");
+
+  ls.stdout.on("data", data => {
+      console.log(`stdout: ${data}`);
+  });
+
+  ls.stderr.on("data", data => {
+      console.log(`stderr: ${data}`);
+  });
+
+  ls.on('error', (error) => {
+      console.log(`error: ${error.message}`);
+  });
+
+  ls.on("close", code => {
+      console.log(`child process exited with code ${code}`);
+  });
 }
 
-const ls = spawn("./update.sh");
 
-ls.stdout.on("data", data => {
-    console.log(`stdout: ${data}`);
-});
-
-ls.stderr.on("data", data => {
-    console.log(`stderr: ${data}`);
-});
-
-ls.on('error', (error) => {
-    console.log(`error: ${error.message}`);
-});
-
-ls.on("close", code => {
-    console.log(`child process exited with code ${code}`);
-});
-
-
-fs.writeFileSync('../src/data/shows.json', JSON.stringify(filtered))
+fs.writeFileSync('./src/data/shows.json', JSON.stringify(filtered))

@@ -47,7 +47,7 @@ fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/albums?market=US&
           // console.log(obj)
           discography.push(obj)
         })
-        .then(() => fs.writeFileSync('../src/data/discography.json', JSON.stringify(discography)))
+        .then(() => fs.writeFileSync('./src/data/discography.json', JSON.stringify(discography)))
         .catch(error => console.log(error));
     })
 
