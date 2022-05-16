@@ -4,6 +4,9 @@ git pull
 
 npm run build
 
+git config --global user.email "jared.m.whalen@gmail.com"
+git config --global user.name "jaredwhalen"
+
 git add .
 git status
 git commit -m "$message"

@@ -115,6 +115,8 @@ filtered.forEach(show => {
 
 let currentData = JSON.parse(fs.readFileSync('./src/data/shows.json'));
 
+fs.writeFileSync('./src/data/shows.json', JSON.stringify(filtered))
+
 if (currentData.length < filtered.length) {
   console.log("new shows added")
   const ls = spawn("./scripts/update.sh");
@@ -135,6 +137,3 @@ if (currentData.length < filtered.length) {
       console.log(`child process exited with code ${code}`);
   });
 }
-
-
-fs.writeFileSync('./src/data/shows.json', JSON.stringify(filtered))
