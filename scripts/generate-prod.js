@@ -48,7 +48,9 @@ setlists.forEach(d => {
   if (!!d.sets[0].set) {
     d.sets[0].set.map(x => x.song.map(s => {
       obj.setlist.push(normalize(s.$.name))
-      obj.setlistFlat.push(s.$.name)
+      if (!!!s.$.tape) {
+        obj.setlistFlat.push(s.$.name)
+      }
     }))
     tour.push(obj)
   }
