@@ -44,7 +44,7 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      color: var(--primary);
+      color: var(--color-primary);
       text-transform: uppercase;
       font-size: 12px;
 

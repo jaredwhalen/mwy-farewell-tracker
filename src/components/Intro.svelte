@@ -9,8 +9,9 @@
     that historically setlist can vary greatly from night to night. Even on their “Brother, Sister” anniversary tour where they band played the album in full, with lengthy encores they managed to not repeat the
     same setlist twice.</p>
 
-  <p>To visualize this assortment (and just as an opportunity to geek out about an amazing band), I am using <a target="_blank" src="https://www.setlist.fm/setlists/mewithoutyou-43d60b1b.html">setlist.fm</a> data to visualize what songs the band plays on each night. The color indicates the
-    position in the set a song is played. {#if $isMobile} Tap on{:else}Hover over{/if} a square to listen to the song and see that show's entire setlist. This app will update as new setlists become available.</p>
+  <p>To visualize this assortment (and just as an opportunity to geek out about an amazing band), I am using <a target="_blank" src="https://www.setlist.fm/setlists/mewithoutyou-43d60b1b.html">setlist.fm</a> data to visualize what songs the band plays on each night. {#if $isMobile} Tap on{:else}Hover over{/if} a square to listen to the song and see that show's entire setlist. This app will update as new setlists become available.</p>
+
+  <p>The color indicates the position in the set a song is played. The rows of numbers indicate how many songs off a particular album were played in a set, and the vertical column shows how many times a song has been played in total.</p>
 
   <p>See anything off? Have ideas on how to make this better? Send me an email at <a href="mailto:jared.m.whalen@gmail.com">jared.m.whalen@gmail.com</a>.</p>
 

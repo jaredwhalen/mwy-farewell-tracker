@@ -41,7 +41,7 @@
 :global(:root) {
   --light: #4F4F4F;
   --dark: #252525;
-  --primary: #EFE6D3;
+  --color-primary: #EFE6D3;
   --accent: #4d98cc;
   --color-offwhite: #FCFCFD;
 
@@ -52,7 +52,7 @@
 
 :global(body) {
   background: var(--light);
-  color: var(--primary);
+  color: var(--color-primary);
   margin: 0px;
   // width: 100%;
   // overflow-x: hidden;

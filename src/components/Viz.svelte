@@ -6,7 +6,6 @@
 
 
   export let shows
-  console.log(shows)
 
   // shows.forEach(show => show.setlistFlat = show.setlist.map(album => album.tracks.filter(track => track.played)).flat().sort((a,b) => a.index - b.index))
 
@@ -54,6 +53,9 @@
   }
 
   $: src;
+
+  let everySongPlayed = shows.map(show => show.setlist.map(album => album.tracks.filter(track => track.played)).flat().map(d => d.name)).flat()
+
 </script>
 
 
@@ -78,12 +80,14 @@
 
   <div id="table">
     <div id="discography">
-      {#each discography as album}
+      {#each discography as album, i}
         <div class="album">
-          <h3>{album.name}</h3>
+          <h3>{album.name}<div class="count">{#if !i}#{/if}</div></h3>
             {#each album.tracks as track}
+            {@const count = everySongPlayed.filter(s => s == track.name).length}
             <div class="cell">
               <div class="track">{track.name}</div>
+              {#if count}<div class="count">{count}</div>{:else}<div class="count"></div>{/if}
             </div>
             {/each}
         </div>
@@ -94,8 +98,9 @@
         {@const colorScale = scaleSequential(colors).domain([1, show.setlistFlat.length]) }
         <div class="setlist">
           {#each show.setlist as album}
+            {@const count = album.tracks.filter(track => track.played).length}
             <div class="album">
-              <h3>&nbsp;</h3>
+              <h3>{#if count}<span>{count}</span>{:else}&nbsp;{/if}</h3>
                 {#each album.tracks as track}
                   <div class="cell">
                     <div
@@ -127,7 +132,7 @@
   }
 
   :global(.tippy-content) {
-    color: var(--primary);
+    color: var(--color-primary);
     font-family: var(--font-sans);
     font-size: 12px;
   }
@@ -197,7 +202,7 @@
         }
 
         a {
-          color: var(--primary);
+          color: var(--color-primary);
         }
       }
     }
@@ -216,6 +221,16 @@
       padding-bottom: 5px;
       color: var(--color-offwhite);
       font-family: var(--font-serif);
+
+      span {
+        font-family: var(--font-sans);
+        font-size: 12px;
+        color: var(--color-primary);
+        text-align: center;
+        display: inline-block;
+        width: 100%;
+        font-weight: 100;
+      }
     }
 
 
@@ -245,14 +260,33 @@
           padding-right: 10px;
     }
 
-    .album h3, .track {
+    h3 {
+      text-align: right;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      display: block;
+      overflow: hidden;
+      // margin-right: 20px;
+    }
 
+    .track {
       text-align: right;
       white-space: nowrap;
       text-overflow: ellipsis;
       width: 100%;
       display: block;
-      overflow: hidden
+      overflow: hidden;
+    }
+
+    .count {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--color-primary);
+      text-align: center;
+      display: inline-block;
+      font-weight: 100;
+      width: 20px;
+      text-align: right;
     }
 
   }
