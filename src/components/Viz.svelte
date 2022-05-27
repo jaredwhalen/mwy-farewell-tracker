@@ -7,8 +7,6 @@
 
   export let shows
 
-  // shows.forEach(show => show.setlistFlat = show.setlist.map(album => album.tracks.filter(track => track.played)).flat().sort((a,b) => a.index - b.index))
-
   let discography = shows[0].setlist
   let player
   let src;
@@ -16,11 +14,6 @@
   export let colors;
 
   let normalize = str => str.toLowerCase().replace("two", "2").replace(/[^a-zA-Z ]/g, "")
-
-
-  // const getColor =  => {
-  //   let colorScale = scaleSequential(colors).domain([1, show.setlist.map(album => album.tracks.filter(track => track.played)).flat().length()])
-  // }
 
   const onHover = (preview_url, show) => {
     player.pause()
@@ -56,6 +49,8 @@
 
   let everySongPlayed = shows.map(show => show.setlist.map(album => album.tracks.filter(track => track.played)).flat().map(d => d.name)).flat()
 
+  let numberOfSongs = [...new Set(everySongPlayed)].length
+
 </script>
 
 
@@ -70,6 +65,12 @@
 <div id="viz">
 
   <div id="head">
+    <div id="song-counter">
+      <dl>
+        <dt>{numberOfSongs}</dt>
+        <dd>distinct songs</dd>
+      </dl>
+    </div>
   {#each shows as show}
     <div class="show">
     <div class="label"><a href={show.url} target="_blank">{show.city}, {show.state} – {getFormattedDate(show.date)}</a></div>
@@ -100,7 +101,7 @@
           {#each show.setlist as album}
             {@const count = album.tracks.filter(track => track.played).length}
             <div class="album">
-              <h3>{#if count}<span>{count}</span>{:else}&nbsp;{/if}</h3>
+              <h3>{#if count}<span class="count">{count}</span>{:else}&nbsp;{/if}</h3>
                 {#each album.tracks as track}
                   <div class="cell">
                     <div
@@ -206,6 +207,36 @@
         }
       }
     }
+
+    #song-counter {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width: var(--sidebarWidth);
+      height: 100%;
+      display: flex;
+      align-items: end;
+      justify-content: flex-end;
+
+      dl {
+        text-align: right;
+        width: 120px;
+        opacity: 0.5;
+        dt {
+          font-family: var(--font-sans);
+          font-size: 24px;
+          font-weight: 100;
+        }
+
+        dd {
+          font-family: var(--font-sans);
+          font-size: 12px;
+          margin: 0 auto;
+        }
+      }
+
+
+    }
   }
 
   #table {
@@ -230,6 +261,10 @@
         display: inline-block;
         width: 100%;
         font-weight: 100;
+      }
+
+      .count {
+        opacity: 0.5;
       }
     }
 
@@ -287,6 +322,7 @@
       font-weight: 100;
       width: 20px;
       text-align: right;
+      opacity: 0.5;
     }
 
   }

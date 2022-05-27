@@ -24,6 +24,9 @@ setlists.forEach(d => d.$.eventDate = new Date(d.$.eventDate.split("-").reverse(
 
 setlists.sort((a,b) => new Date(a.$.eventDate) - new Date(b.$.eventDate))
 
+let fixSetlistName = str => str
+.replace("Cemetery", "Cleo's Ferry Cemetery")
+
 let normalize = str => str
 // specific songs
 .replace("Paper-Hanger", "Paper Hanger")
@@ -47,9 +50,9 @@ setlists.forEach(d => {
 
   if (!!d.sets[0].set) {
     d.sets[0].set.map(x => x.song.map(s => {
-      obj.setlist.push(normalize(s.$.name))
+      obj.setlist.push(normalize(fixSetlistName(s.$.name)))
       if (!!!s.$.tape) {
-        obj.setlistFlat.push(s.$.name)
+        obj.setlistFlat.push(fixSetlistName(s.$.name))
       }
     }))
     tour.push(obj)
