@@ -51,6 +51,8 @@
 
   let numberOfSongs = [...new Set(everySongPlayed)].length
 
+  console.log([...new Set(everySongPlayed)])
+
 </script>
 
 
