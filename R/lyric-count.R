@@ -7,8 +7,9 @@ library(httr)
 library(jsonlite)
 library(readr)
 library(dplyr)
+library(rvest)
 
-genius_token <- 'KXIhV_H79xaewh4OGUfPMjlKhM7oiN9604C7AcagP8qvhR-OHwjBYecKV1sUINsU1_xhwnFA3qhXCl95e6NX1A'
+genius_token <- 'ns5R9DqwLyAMLn0mZSYeGbCe01c5E37FCVMDehk8CuP2uG4RLrtX76nGDCTXY7NI'
 
 request_song_info <- function(song_name, artist) {
   base_url = 'https://api.genius.com'
@@ -182,4 +183,6 @@ for (i in 1:nrow(url_df)) {
   
 }
 
-lyrics_df <- bind_rows(lyrics_list) %>%  distinct()
+lyrics_df <- bind_rows(lyrics_list) %>%  distinct() %>% mutate(lyrics = gsub("\\[.*?\\]", "", lyrics))
+
+write_csv(lyrics_df, "lyrics_df.csv", na = '')
