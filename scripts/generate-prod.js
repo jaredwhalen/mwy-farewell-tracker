@@ -59,7 +59,6 @@ setlists.forEach(d => {
     if (d.$.eventDate.toString() == "Fri Jun 10 2022 20:00:00 GMT-0400 (Eastern Daylight Time)") {
       obj.setlistFlat.splice(obj.setlistFlat.length - 1, 0, fixSetlistName("Julian the Onion"))
       obj.setlist.splice(obj.setlist.length - 1, 0, fixSetlistName("julian the onion"))
-      console.log(obj.setlist)
     }
 
     tour.push(obj)
@@ -127,10 +126,15 @@ filtered.forEach(show => {
 
 let currentData = JSON.parse(fs.readFileSync('./src/data/shows.json'));
 
+
+
 fs.writeFileSync('./src/data/shows.json', JSON.stringify(filtered))
 
 if (currentData.length < filtered.length) {
   console.log("new shows added")
+
+  console.log(filtered[filtered.length - 1].setlistFlat)
+
   const ls = spawn("./scripts/update.sh");
 
   ls.stdout.on("data", data => {
