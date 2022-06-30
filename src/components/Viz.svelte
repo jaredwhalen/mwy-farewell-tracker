@@ -11,9 +11,17 @@
   let player
   let src;
 
+  console.log(discography)
+
   export let colors;
 
-  let normalize = str => str.toLowerCase().replace("two", "2").replace(/[^a-zA-Z ]/g, "")
+  // customized to handle weird names, covers, etc.
+  let normalize = str => str
+  .replace(/ w\/.*/, "")
+  .toLowerCase()
+  .replace("two", "2")
+  .replace(/[^a-zA-Z ]/g, "")
+  .replace("memphis will be laid to waste", "messes of men")
 
   const onHover = (preview_url, show) => {
     player.pause()
@@ -50,8 +58,6 @@
   let everySongPlayed = shows.map(show => show.setlist.map(album => album.tracks.filter(track => track.played)).flat().map(d => d.name)).flat()
 
   let numberOfSongs = [...new Set(everySongPlayed)].length
-
-  console.log([...new Set(everySongPlayed)])
 
 </script>
 

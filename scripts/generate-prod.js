@@ -38,6 +38,7 @@ let normalize = str => str
 
 let tour = []
 setlists.forEach(d => {
+
   let obj = {
     date: d.$.eventDate,
     venue: d.venue[0].$.name,
@@ -52,7 +53,12 @@ setlists.forEach(d => {
     d.sets[0].set.map(x => x.song.map(s => {
       obj.setlist.push(normalize(fixSetlistName(s.$.name)))
       if (!!!s.$.tape) {
-        obj.setlistFlat.push(fixSetlistName(s.$.name))
+        if (!!s.info && s.info[0].includes("Memphis")) {
+          obj.setlist.push(normalize('Memphis Will Be Laid to Waste'))
+          obj.setlistFlat.push(`${s.$.name} w/ Memphis Will Be Laid to Waste`)
+        } else {
+          obj.setlistFlat.push(fixSetlistName(s.$.name))
+        }
       }
     }))
 
@@ -118,7 +124,11 @@ let filtered = shows
 
 filtered.forEach(show => {
   if (show.setlist.map(album => album.tracks.filter(track => track.played)).flat().length != show.setlistFlat.length) {
-    console.log("Uneven setlist match.")
+    if (show.setlistFlat.findIndex(s => s.includes("Memphis") && ((show.setlist.map(album => album.tracks.filter(track => track.played)).flat().length - 1) != show.setlistFlat.length))) {
+      console.log("Uneven setlist match but includes 'Memphis Will Be Laid to Waste' mashup")
+    } else {
+      console.log("Uneven setlist match.")
+    }
   }
 })
 
