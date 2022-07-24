@@ -11,8 +11,6 @@
   let player
   let src;
 
-  console.log(discography)
-
   export let colors;
 
   // customized to handle weird names, covers, etc.
@@ -55,7 +53,22 @@
 
   $: src;
 
-  let everySongPlayed = shows.map(show => show.setlist.map(album => album.tracks.filter(track => track.played)).flat().map(d => d.name)).flat()
+
+  console.log(shows)
+
+  let everySongPlayed = shows.map(show => {
+    return(show.setlist.map(album => {
+      return(album.tracks.filter(track => {
+        if (track.played && (track.name == 'We Know Who Our Enemies Are') && album.name == "I Never Said That I Was Brave") {
+          console.log(show)
+        } else {
+          return(track.played)
+        }
+      }))
+    }).flat().map(d => d.name))
+  }).flat()
+
+  console.log(everySongPlayed)
 
   let numberOfSongs = [...new Set(everySongPlayed)].length
 
