@@ -59,11 +59,11 @@
   let everySongPlayed = shows.map(show => {
     return(show.setlist.map(album => {
       return(album.tracks.filter(track => {
-        if (track.played && (track.name == 'We Know Who Our Enemies Are') && album.name == "I Never Said That I Was Brave") {
-          console.log(show)
-        } else {
+        // if (track.played && (track.name == 'We Know Who Our Enemies Are') && album.name == "I Never Said That I Was Brave") {
+        //   console.log(show)
+        // } else {
           return(track.played)
-        }
+        // }
       }))
     }).flat().map(d => d.name))
   }).flat()
@@ -108,7 +108,7 @@
             {#each album.tracks as track}
             {@const count = everySongPlayed.filter(s => s == track.name).length}
             <div class="cell">
-              <div class="track">{track.name}</div>
+              <div class="track">{track.name.replaceAll("<skip>", "")}</div>
               {#if count}<div class="count">{count}</div>{:else}<div class="count"></div>{/if}
             </div>
             {/each}
