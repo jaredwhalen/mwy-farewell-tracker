@@ -65,7 +65,7 @@ setlists.forEach(d => {
       }
     }))
 
-    if (d.$.eventDate.toString() == "Fri Jun 10 2022 20:00:00 GMT-0400 (Eastern Daylight Time)") {
+    if (["Fri Jun 10 2022 20:00:00 GMT-0400 (Eastern Daylight Time)", "Sat Jul 23 2022 20:00:00 GMT-0400 (Eastern Daylight Time)"].includes(d.$.eventDate.toString())) {
       obj.setlistFlat.splice(obj.setlistFlat.length - 1, 0, fixSetlistName("Julian the Onion"))
       obj.setlist.splice(obj.setlist.length - 1, 0, fixSetlistName("julian the onion"))
     }
