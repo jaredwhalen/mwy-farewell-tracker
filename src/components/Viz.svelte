@@ -54,7 +54,6 @@
   $: src;
 
 
-  console.log(shows)
 
   let everySongPlayed = shows.map(show => {
     return(show.setlist.map(album => {
@@ -68,7 +67,6 @@
     }).flat().map(d => d.name))
   }).flat()
 
-  console.log(everySongPlayed)
 
   let numberOfSongs = [...new Set(everySongPlayed)].length
 

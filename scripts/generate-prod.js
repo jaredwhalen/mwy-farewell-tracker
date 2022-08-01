@@ -56,11 +56,12 @@ setlists.forEach(d => {
         if (!!s.info && s.info[0].includes("Memphis")) {
           obj.setlist.push(normalize('Memphis Will Be Laid to Waste'))
           obj.setlistFlat.push(`${s.$.name} w/ Memphis Will Be Laid to Waste`)
-        } if ((!!s.info && s.info[0].includes("acoustic")) && (s.$.name == "Winter Solstice"))  {
+        } else if ((!!s.info && s.info[0].includes("acoustic")) && (s.$.name == "Winter Solstice"))  {
           obj.setlist.push(normalize("Winter Solstice (alt. version)"))
           obj.setlistFlat.push("Winter Solstice (alt. version)")
-        }else {
+        } else {
           obj.setlistFlat.push(fixSetlistName(s.$.name))
+
         }
       }
     }))
