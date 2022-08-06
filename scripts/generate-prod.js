@@ -140,9 +140,6 @@ filtered.forEach(show => {
 
 let currentData = JSON.parse(fs.readFileSync('./src/data/shows.json'));
 
-
-fs.writeFileSync('./src/data/shows2.json', JSON.stringify(filtered.map(d => d.setlistFlat)))
-
 if (currentData.length < filtered.length) {
   console.log("new shows added")
 
