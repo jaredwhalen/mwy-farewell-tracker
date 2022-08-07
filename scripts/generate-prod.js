@@ -51,7 +51,7 @@ setlists.forEach(d => {
 
   if (!!d.sets[0].set) {
     d.sets[0].set.map(x => x.song.map(s => {
-      obj.setlist.push(normalize(fixSetlistName(s.$.name)))
+
       if (!!!s.$.tape) {
         if (!!s.info && s.info[0].includes("Memphis")) {
           obj.setlist.push(normalize('Memphis Will Be Laid to Waste'))
@@ -59,17 +59,17 @@ setlists.forEach(d => {
         } else if ((!!s.info && s.info[0].includes("acoustic")) && (s.$.name == "Winter Solstice"))  {
           obj.setlist.push(normalize("Winter Solstice (alt. version)"))
           obj.setlistFlat.push("Winter Solstice (alt. version)")
-        } else {
+        } else if ((!!s.info && s.info[0].includes("Julian")) && (s.$.name == "Son of a Widow"))  {
+          obj.setlist.push(normalize("Julian the Onion"))
+          obj.setlistFlat.push("Julian the Onion")
+          obj.setlist.push(normalize(fixSetlistName(s.$.name)))
           obj.setlistFlat.push(fixSetlistName(s.$.name))
-
+        } else {
+          obj.setlist.push(normalize(fixSetlistName(s.$.name)))
+          obj.setlistFlat.push(fixSetlistName(s.$.name))
         }
       }
     }))
-
-    if (["Fri Jun 10 2022 20:00:00 GMT-0400 (Eastern Daylight Time)", "Sat Jul 23 2022 20:00:00 GMT-0400 (Eastern Daylight Time)"].includes(d.$.eventDate.toString())) {
-      obj.setlistFlat.splice(obj.setlistFlat.length - 1, 0, fixSetlistName("Julian the Onion"))
-      obj.setlist.splice(obj.setlist.length - 1, 0, fixSetlistName("julian the onion"))
-    }
 
     tour.push(obj)
   }
