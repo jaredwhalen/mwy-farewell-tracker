@@ -99,7 +99,8 @@ tour.forEach(s => {
       let trackObj = {
         name: track.name,
         preview_url: track.preview_url,
-        played: setlist.includes(normalize(track.name))
+        played: setlist.includes(normalize(track.name)),
+        id: track.id
       }
 
       if (trackObj.played) {
