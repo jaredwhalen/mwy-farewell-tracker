@@ -55,6 +55,7 @@ setlists.forEach(d => {
       if (!!!s.$.tape) {
         if (!!s.info && s.info[0].includes("Memphis")) {
           obj.setlist.push(normalize('Memphis Will Be Laid to Waste'))
+          obj.setlist.push(normalize(fixSetlistName(s.$.name)))
           obj.setlistFlat.push(`${s.$.name} w/ Memphis Will Be Laid to Waste`)
         } else if ((!!s.info && s.info[0].includes("acoustic")) && (s.$.name == "Winter Solstice"))  {
           obj.setlist.push(normalize("Winter Solstice (alt. version)"))
