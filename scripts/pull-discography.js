@@ -15,14 +15,12 @@ let options = {
 fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/albums?market=US&include_groups=album,single`, options).then(response => response.text())
   .then(albums => {
 
-
     let removeList = [
-      "0rNQkfrozT5NAIGMQCmZrY",
-      "39P5R1B5XF1dGhpojrukVA",
+      "0rNQkfrozT5NAIGMQCmZrY", // Pale Horses duplicate
+      "39P5R1B5XF1dGhpojrukVA", // Julia single
       "0kehR2IIZopnzrQmX7vSdn", // Cleo's Ferry Cemetery
       "5MvGNrIZQfOBuvyXkqXZm3", //Audio Tree live
       "5mjQR6Caqn6nC2Wax3n8nf", //Audio Tree live
-      "2X3mjnQ9n6pzNgLMUGZ8Ex",
       "2X3mjnQ9n6pzNgLMUGZ8Ex" //East Enders Wives - Maxi Single
     ]
 
@@ -44,12 +42,10 @@ fetch(`https://api.spotify.com/v1/artists/${artist_spotify_id}/albums?market=US&
         .then(response => response.text())
         .then(tracks => {
           let obj = {...d, tracks: JSON.parse(tracks).items};
-          // console.log(obj)
           discography.push(obj)
         })
         .then(() => fs.writeFileSync('./src/data/discography.json', JSON.stringify(discography)))
         .catch(error => console.log(error));
     })
-
 
   }).catch(error => console.log(error));
